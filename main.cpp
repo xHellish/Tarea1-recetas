@@ -16,11 +16,12 @@ int convertir_Str_Int(string num_str){
 	return result;
 }
 	
-void agregarCombo(){
+Combo agregarCombo(){
 	
 	string combo_nom = "";
 	string porciones_str = "";
 	Componente combo_componentes[30];
+	int porciones_int = 0;
 	
 	cout << "Ingrese el nombre del combo: ";
 	getline(cin, combo_nom);
@@ -28,12 +29,16 @@ void agregarCombo(){
 	cout << "Digite las porciones: ";
 	getline(cin, porciones_str);
 	
+	porciones_int = convertir_Str_Int(porciones_str);
+	
 	cout << "Seleccione los componentes y su cantidad: " << endl;
+	
+	int sizeCont = 0;
 	
 	for (int i = 0; i <= 30; i++){
 		
 		if(i == 30){
-			cout << "No se pueden agregar más componentes. (máx 30)" << endl;
+			cout << "No se pueden agregar más componentes. (máx 30) \n" << endl;
 			break;
 		}
 		
@@ -58,8 +63,16 @@ void agregarCombo(){
 		
 		if (_confirm != "y" and _confirm != "Y"){
 			break;
-		}		
-	}					
+		}
+		
+		sizeCont += 1;
+				
+	}
+	
+	Combo _combo = Combo(combo_nom, porciones_int, combo_componentes, sizeCont);
+	
+	return _combo;
+						
 }
 
 void imprimirTodosCombos(){
