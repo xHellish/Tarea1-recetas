@@ -1,23 +1,65 @@
-#include <iostream>
 #include "Estructuras.h"
 
 // Funciones
 
+int convertir_Str_Int(string num_str){
+	
+	int result = 0;
+	size_t i = 0;
+	
+	for (; i < num_str.length(); ++i) {
+        if (num_str[i] >= '0' && num_str[i] <= '9'){
+        	result = result * 10 + (num_str[i] - '0');
+        	
+		}            
+	}	
+	return result;
+}
+	
 void agregarCombo(){
 	
 	string combo_nom = "";
-	int porciones = 0;
+	string porciones_str = "";
 	Componente combo_componentes[30];
 	
-	cout << "* AGREGAR COMBO * \n\n Ingrese el nombre del combo: ";
+	cout << "Ingrese el nombre del combo: ";
 	getline(cin, combo_nom);
 	
-	cout << "Digite la cantidad de porciones: ";
-	cin >> porciones;
-	cin.ignore();
+	cout << "Digite las porciones: ";
+	getline(cin, porciones_str);
 	
-	cout << "Digite sus componentes: ";
-			
+	cout << "Seleccione los componentes y su cantidad: " << endl;
+	
+	for (int i = 0; i <= 30; i++){
+		
+		if(i == 30){
+			cout << "No se pueden agregar más componentes. (máx 30)" << endl;
+			break;
+		}
+		
+		string _componente = "";
+		string _cantidad = "0";
+		
+		cout << "COMPONENTE: ";
+		getline(cin, _componente); 
+		
+		cout << "CANTIDAD: ";
+		getline(cin, _cantidad);
+		
+		string _confirm = "";
+		
+		cout << "¿Desea agregar otro componente? (y/n) ";
+		getline(cin, _confirm);
+		
+		int cantidad;
+		cantidad = convertir_Str_Int(_cantidad);
+		
+		combo_componentes[i] = Componente(_componente, cantidad);
+		
+		if (_confirm != "y" and _confirm != "Y"){
+			break;
+		}		
+	}					
 }
 
 void imprimirTodosCombos(){
@@ -45,43 +87,33 @@ void Menu(){
 		cout << "9. Salir." << endl;
 		cout << "" << endl;
 		
-		int opcion;
+		string opcion;
         cout << "Digite la opción: ";
-        cin >> opcion;
+        getline(cin, opcion);
         cout << "" << endl;
         
-        switch (opcion) {
-            case 1:
-                agregarCombo();
-                break;
-            case 2:
-                // Lógica para buscar combo
-                break;
-            case 3:
-                // Lógica para borrar combo
-                break;
-            case 4:
-                imprimirTodosCombos();
-                break;
-            case 5:
-                // Lógica para modificar nombre de un combo
-                break;
-            case 6:
-                // Lógica para modificar cantidad de un componente de un combo
-                break;
-            case 7:
-                // Lógica para agregar componente a un combo
-                break;
-            case 8:
-                // Lógica para calcular para porciones
-                break;
-            case 9:
-                cout << "Saliendo del programa..." << endl;
-                return;
-            default:
-                cout << "Opción no válida. Por favor, seleccione una opción válida." << endl;
-        }
+		if (opcion == "1"){
+			agregarCombo();
 			
+		}else if(opcion == "2"){
+			
+		}else if(opcion == "3"){
+			
+		}else if(opcion == "4"){
+			imprimirTodosCombos();
+			
+		}else if(opcion == "5"){
+			
+		}else if(opcion == "6"){
+			
+		}else if(opcion == "7"){
+			
+		}else if(opcion == "8"){
+			
+		}else if(opcion == "9"){
+			return;
+			
+		}
 	}
 }
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */

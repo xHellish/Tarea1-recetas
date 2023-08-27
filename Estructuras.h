@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "Prototipos.c"
+
 using namespace std;
 
 struct Componente{
