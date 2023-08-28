@@ -3,19 +3,7 @@
 // Funciones aux
 Combo array_combos[100];
 
-int convertir_Str_Int(string num_str){
-	
-	int result = 0;
-	size_t i = 0;
-	
-	for (; i < num_str.length(); ++i) {
-        if (num_str[i] >= '0' && num_str[i] <= '9'){
-        	result = result * 10 + (num_str[i] - '0');
-        	
-		}            
-	}	
-	return result;
-}
+
 
 // Función 1: Crear combo. Pide datos para agregar el combo al array de combos.	
 
@@ -127,14 +115,14 @@ void Menu(){
         cout << "" << endl;
         
 		if (opcion == "1"){
-			agregarCombo();
+			//agregarCombo();
 			
 		}else if(opcion == "2"){
 			
 		}else if(opcion == "3"){
 			
 		}else if(opcion == "4"){
-			imprimirTodosCombos(array_combos);
+			//imprimirTodosCombos(array_combos);
 			
 		}else if(opcion == "5"){
 			
