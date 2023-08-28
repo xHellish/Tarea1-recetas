@@ -91,8 +91,7 @@ void agregarCombo(){
 		}
 		
 	}
-	
-	
+		
 }
 
 // Función 4: Imprime todos los combos del array de combos.
