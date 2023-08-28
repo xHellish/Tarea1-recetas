@@ -1,6 +1,7 @@
 #include "Estructuras.h"
 
 // Funciones aux
+Combo array_combos[100];
 
 int convertir_Str_Int(string num_str){
 	
@@ -79,20 +80,27 @@ Combo crearCombo(){
 
 void agregarCombo(){
 	
-	Combo combo1 = crearCombo();
-	
-	/* se necesita una función que analice el size del array de combos, 
-	para agregar el nuevo Combo al espacio siguiente disponible. */
+	for (int i = 0; i < 100; i++){
+		
+		if(array_combos[i].comboVacio() == ""){
+			Combo combo1 = crearCombo();
+			array_combos[i] = combo1;
+			break;	
+		}else{
+			continue;
+		}
+		
+	}
 	
 	
 }
 
 // Función 4: Imprime todos los combos del array de combos.
 
-void imprimirTodosCombos(){
+void imprimirTodosCombos(Combo array[]){
 	
 	for (int i = 0; i < 100; i++){
-		cout <<  " -";
+		array[i].imprimirCombo();
 	};
 	
 	cout << endl;
@@ -120,14 +128,14 @@ void Menu(){
         cout << "" << endl;
         
 		if (opcion == "1"){
-			crearCombo();
+			agregarCombo();
 			
 		}else if(opcion == "2"){
 			
 		}else if(opcion == "3"){
 			
 		}else if(opcion == "4"){
-			imprimirTodosCombos();
+			imprimirTodosCombos(array_combos);
 			
 		}else if(opcion == "5"){
 			

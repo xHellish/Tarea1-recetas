@@ -35,6 +35,7 @@ struct Componente{
 		cantidad = _cantidad;	
 	}
 	
+	// Métodos
 	string retornarComponente(){
 		string _cantidad_str = enteroStr(cantidad);
 	
@@ -49,6 +50,10 @@ struct Combo{
 	Componente componentes[30];
 	int sizeCombo = 0;
 	
+	// Default
+	Combo(string nombre_combo = "", int num_porciones = 0, int sizeCombo = 0){	
+	}
+	
 	// Constructor
 	Combo(string _nombre_combo, int _num_porciones, Componente _componentes[30], int _sizeCombo){
 		nombre_combo = _nombre_combo;
@@ -62,14 +67,39 @@ struct Combo{
 	
 	// Métodos
 	void imprimirCombo(){
-		cout << "NOMBRE: " + nombre_combo << endl;
-		cout << "PORCIONES: " + num_porciones << endl;
-		cout << "COMPONENTES: \n";
 		
-		for (int i = 0; i < sizeCombo; i++){
-			cout << componentes[i].retornarComponente() << endl;	
-		}	
+		if(nombre_combo != ""){
+			cout << "NOMBRE: " + nombre_combo << endl;
+			cout << "PORCIONES: " + num_porciones << endl;
+			cout << "COMPONENTES:" << endl;
+		
+			for (int i = 0; i < sizeCombo; i++){
+				cout << componentes[i].retornarComponente() << endl;	
+			}
+			cout << "------------------------------------------" << endl;	
+		}		
+	}
+	
+	string comboVacio(){
+		if(nombre_combo == ""){
+			return "";
+		}else{
+			return nombre_combo;
+		}
 	}	
+};
+
+
+struct Combos{
+	
+	Combo _combos[100];
+	
+	void imprimirCombos(int combos_size){
+		
+		for (int i = 0; i < combos_size; i++){
+			_combos[i].imprimirCombo();
+		}
+	}
 };
 
 
