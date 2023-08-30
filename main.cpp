@@ -34,7 +34,7 @@ Combo crearCombo(){
 	
 	porciones_int = convertir_Str_Int(porciones_str);
 	
-	cout << "Seleccione los componentes y su cantidad: " << endl;
+	cout << "Seleccione los componentes y su cantidad: " + porciones_str << endl;
 	
 	int sizeCont = 0;
 	
@@ -79,9 +79,7 @@ Combo crearCombo(){
 }
 
 void agregarCombo(){
-	
 	for (int i = 0; i < 100; i++){
-		
 		if(array_combos[i].comboVacio() == ""){
 			Combo combo1 = crearCombo();
 			array_combos[i] = combo1;
@@ -94,6 +92,25 @@ void agregarCombo(){
 		
 }
 
+// Función 2: Buscar combo por nombre.
+
+void buscarCombo(){
+	
+	string nombreCombo;
+	
+	cout << "DIGITE EL NOMBRE DEL COMBO: ";
+	getline(cin, nombreCombo);
+	
+	for (int i = 0; i < 100; i++){
+		if (array_combos[i].nombre_combo == nombreCombo){
+			array_combos[i].imprimirCombo();
+			return;
+		} 
+	}
+	
+	cout << "\n NOMBRE NO EXISTE";
+		
+}
 // Función 4: Imprime todos los combos del array de combos.
 
 void imprimirTodosCombos(Combo array[]){
@@ -130,6 +147,7 @@ void Menu(){
 			agregarCombo();
 			
 		}else if(opcion == "2"){
+			buscarCombo();
 			
 		}else if(opcion == "3"){
 			

@@ -1,9 +1,8 @@
 #include <iostream>
 #include <string>
-#include "Prototipos.c"
 using namespace std;
 
-// Funciones aux
+//------------------Funciones aux-------------------
 
 string enteroStr(int entero) {
 	    if (entero == 0) {
@@ -22,7 +21,7 @@ string enteroStr(int entero) {
 	    return cadena;
 }
 
-// Estructuras
+// ------------------Estructuras-----------------
 
 struct Componente{
 	
@@ -35,11 +34,18 @@ struct Componente{
 		cantidad = _cantidad;	
 	}
 	
-	// Métodos
+	// -----------------Métodos------------------
 	string retornarComponente(){
 		string _cantidad_str = enteroStr(cantidad);
-	
-		return nombre_comp + " " + _cantidad_str;
+		
+		if (nombre_comp == ""){
+			return "";
+		}else{
+			string compUnido = "- " + nombre_comp + " " + _cantidad_str + " ";
+			return compUnido;
+			
+		}
+			
 	}	
 };	
 
@@ -65,18 +71,17 @@ struct Combo{
 		}	
 	}; 
 	
-	// Métodos
+	// --------------Métodos-------------
 	void imprimirCombo(){
 		
 		if(nombre_combo != ""){
-			cout << "NOMBRE: " + nombre_combo << endl;
-			cout << "PORCIONES: " + num_porciones << endl;
-			cout << "COMPONENTES:" << endl;
+			cout << "NOMBRE: " + nombre_combo + ", para " + enteroStr(num_porciones) + " porciones." << endl;
+			cout << "COMPONENTES: ";
 		
-			for (int i = 0; i < sizeCombo; i++){
-				cout << componentes[i].retornarComponente() << endl;	
+			for (int i = 0; i <= sizeCombo; i++){
+				cout <<componentes[i].retornarComponente() << endl;	
 			}
-			cout << "------------------------------------------" << endl;	
+			cout << "----------------------------------------" << endl;	
 		}		
 	}
 	
@@ -91,11 +96,9 @@ struct Combo{
 
 
 struct Combos{
-	
 	Combo _combos[100];
 	
 	void imprimirCombos(int combos_size){
-		
 		for (int i = 0; i < combos_size; i++){
 			_combos[i].imprimirCombo();
 		}
