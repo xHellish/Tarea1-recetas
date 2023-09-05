@@ -1,7 +1,9 @@
 #include "Estructuras.h"
 
-// Funciones aux
+// Base de datos.
 Combo array_combos[100];
+
+// -----------Funciones aux------------
 
 int convertir_Str_Int(string num_str){
 	
@@ -17,8 +19,7 @@ int convertir_Str_Int(string num_str){
 	return result;
 }
 
-// Función 1: Crear combo. Pide datos para agregar el combo al array de combos.	
-
+// Función 1: Agregar combo. Pide datos para crear el combo al array de combos.	
 Combo crearCombo(){
 	
 	string combo_nom = "";
@@ -68,16 +69,13 @@ Combo crearCombo(){
 			break;
 		}
 		
-		sizeCont += 1;
-				
+		sizeCont += 1;		
 	}
 	
 	Combo _combo = Combo(combo_nom, porciones_int, combo_componentes, sizeCont);
 	
-	return _combo;
-						
+	return _combo;						
 }
-
 void agregarCombo(){
 	for (int i = 0; i < 100; i++){
 		if(array_combos[i].comboVacio() == ""){
@@ -86,14 +84,11 @@ void agregarCombo(){
 			break;	
 		}else{
 			continue;
-		}
-		
-	}
-		
+		}	
+	}		
 }
 
-// Función 2: Buscar combo por nombre.
-
+// Función 2: Buscar combo por nombre. Si encuentra el nombre dado aplica el método imprimirCombo().
 void buscarCombo(){
 	
 	string nombreCombo;
@@ -107,22 +102,108 @@ void buscarCombo(){
 			return;
 		} 
 	}
+	cout << "\n NOMBRE NO EXISTE";		
+}
+
+// Función 3: Borrar combo. Si encuentra el nombre del combo, borra ese índice del array de combos.
+void borrarCombo(){
 	
-	cout << "\n NOMBRE NO EXISTE";
-		
+	string nombreCombo;
+	
+	cout << "Digite nombre del combo a borrar: ";
+	getline(cin, nombreCombo);
+	
+	for (int i = 0; i < 100; i++){
+		if (array_combos[i].nombre_combo == nombreCombo){
+			for(; i < 99; i++){
+				array_combos[i] = array_combos[i+1];		
+			}
+			cout << "Combo eliminado" << endl;
+			return;
+		}	
+	}
+	
+	cout << "Ningun combo tiene ese nombre." << endl;
+	
 }
 // Función 4: Imprime todos los combos del array de combos.
-
 void imprimirTodosCombos(Combo array[]){
 	
 	for (int i = 0; i < 100; i++){
 		array[i].imprimirCombo();
 	};
-	
-	cout << endl;
-	
+
+	cout << endl;	
 }
 
+// Función 5: Modificar nombre de un combo.
+void modificarNombre(){
+	
+	string nombreCombo;
+	string nuevoNombre;
+	cout << "Ingrese un combo existente: ";
+	getline(cin, nombreCombo);
+	
+	for (int i = 0; i < 100; i++){
+		if (array_combos[i].nombre_combo == nombreCombo){
+			cout << "Digite nuevo nombre: ";
+			getline(cin, nuevoNombre);
+			
+			for (; i < 100; i++){
+				if (array_combos[i].nombre_combo == nuevoNombre){
+					cout << "Combo ya existe, no se puede cambiar nombre. Intente de nuevo.";
+					return;
+				}
+			}
+			array_combos[i].nombre_combo = nuevoNombre;
+			cout << "Nombre cambiado." << endl;
+			return;		
+		}
+	}
+	cout << "Combo no existe." << endl;
+	return;
+}
+
+// Función 6: Modificar cantidad de un componente de un combo.
+void cambiarCantidadComponente(){
+	
+	string nombreCombo;
+	string nombreComponente;
+	string nuevaCantidad;
+	
+	cout << "Digite el nombre del combo: ";
+	getline(cin, nombreCombo);
+	
+	for (int i = 0; i < 100; i++){
+		if(array_combos[i].nombre_combo == nombreCombo){
+			cout << "Digite el nombre del componente: ";
+			getline(cin, nombreComponente);
+			
+			for (; i < 100; i++){
+				for(int j = 0; j < 30; j++){
+					if(array_combos[i].componentes[j].nombre_comp == nombreComponente){
+						cout << "Ingrese nueva cantidad: ";
+						getline(cin, nuevaCantidad);
+						array_combos[i].componentes[j].cantidad = convertir_Str_Int(nuevaCantidad);
+						cout << "Cambio de cantidad exitoso." << endl;
+						return;
+						
+					}
+				}
+			}
+			cout << "Componente no existe.";
+			return;	
+		}	
+	}
+	cout << "Combo no existe.";
+	return;	
+}
+
+// Función 7: Agregar componente a un combo.
+
+// Función 8: Calcular para porciones.
+
+// Función menú que llama a las demás funciones.
 void Menu(){
 	
 	while (true){
@@ -150,13 +231,16 @@ void Menu(){
 			buscarCombo();
 			
 		}else if(opcion == "3"){
+			borrarCombo();
 			
 		}else if(opcion == "4"){
 			imprimirTodosCombos(array_combos);
 			
 		}else if(opcion == "5"){
+			modificarNombre();
 			
 		}else if(opcion == "6"){
+			cambiarCantidadComponente();
 			
 		}else if(opcion == "7"){
 			
@@ -168,7 +252,6 @@ void Menu(){
 	}
 }
 
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
 int main(int argc, char** argv) {
 	
