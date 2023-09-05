@@ -64,7 +64,7 @@ Combo crearCombo(){
 	
 	porciones_int = convertir_Str_Int(porciones_str);
 	
-	cout << "Seleccione los componentes y su cantidad: " + porciones_str << endl;
+	cout << "Seleccione los componentes y su cantidad: " << endl;
 	
 	int sizeCont = 0;
 	
@@ -180,7 +180,7 @@ void modificarNombre(){
 			
 			for (; i < 100; i++){
 				if (array_combos[i].nombre_combo == nuevoNombre){
-					cout << "Combo ya existe, no se puede cambiar nombre. Intente de nuevo.";
+					cout << "Combo ya existe, no se puede cambiar nombre. Intente de nuevo." << endl;
 					return;
 				}
 			}
@@ -215,16 +215,15 @@ void cambiarCantidadComponente(){
 						getline(cin, nuevaCantidad);
 						array_combos[i].componentes[j].cantidad = convertir_Str_Int(nuevaCantidad);
 						cout << "Cambio de cantidad exitoso." << endl;
-						return;
-						
+						return;	
 					}
 				}
 			}
-			cout << "Componente no existe.";
+			cout << "Componente no existe." << endl;
 			return;	
 		}	
 	}
-	cout << "Combo no existe.";
+	cout << "Combo no existe." << endl;
 	return;	
 }
 
@@ -232,36 +231,36 @@ void cambiarCantidadComponente(){
 void agregarComponente(){
 	
 	string nombreCombo;
-	string nombreComponente;
-	string nuevoNombreComponente;
+	string nuevoComponente;
+	string cantidadComp;
 	
 	cout << "Digite el nombre del combo: ";
 	getline(cin, nombreCombo);
 	
 	for (int i = 0; i < 100; i++){
 		if(array_combos[i].nombre_combo == nombreCombo){
-			cout << "Digite el nombre del componente a cambiar: ";
+			cout << "Digite el nombre del componente a agregar y su medida: ";
+			getline(cin, nuevoComponente);
 			
 			for(int j = 0; j < 30; j++){
-				if(array_combos[i].componentes[j].nombre_comp == nombreComponente){
-					cout << "Ingrese nuevo nombre: ";
-					getline(cin, nuevoNombreComponente);
-						
-					for (int k = 0; k < 30; k++){
-						if(array_combos[i].componentes[k].nombre_comp == nuevoNombreComponente){
-								
-							cout << "Componente ya existe, intente de nuevo. " << endl;
-							return;
-							}
-						}
-						
-						array_combos[i].componentes[j].nombre_comp = nuevoNombreComponente;
-						cout << "Cambio de nombre exitoso." << endl;
-						return;	
-					}
+				if(array_combos[i].componentes[j].nombre_comp == nuevoComponente){
+					cout << "Componente ya existe, intente de nuevo." << endl;
+					return;
+				}	
+			}
+			for(int j = 0; j < 30; j++){
+				if(array_combos[i].componentes[j].nombre_comp == ""){
+					cout << "Digite la cantidad: ";
+					getline(cin, cantidadComp);
+					
+					array_combos[i].componentes[j].nombre_comp = nuevoComponente;
+					array_combos[i].componentes[j].cantidad = convertir_Str_Int(cantidadComp);
+					array_combos[i].sizeCombo += 1;
+					
+					cout << "Se agregó nuevo componente con éxito." << endl;
+					return;	
 				}
-				cout << "Componente no existe.";
-				return;			
+			}			
 		}
 	}
 	cout << "Combo no existe.";
@@ -272,12 +271,33 @@ void agregarComponente(){
 void calcularPorciones(){
 	
 	string nombreCombo;
+	string porcionesDadas;
+	float cantidadNueva;
 	
 	cout << "Digite un combo existente: ";
 	getline(cin, nombreCombo);
 	
-	
-	
+	for (int i = 0; i < 100; i++){
+		if (array_combos[i].nombre_combo == nombreCombo){
+			cout << "Indique las porciones a calcular: ";
+			getline(cin, porcionesDadas);
+			
+			cout << "-----------------" << endl;
+			cout << "Combo "+ nombreCombo + " para " + porcionesDadas + " porciones." << endl;
+			cout << "COMPONENTES para " + porcionesDadas + " porciones: "<< endl;
+			
+			for (int j = 0; j < 30; j++){
+				if (array_combos[i].componentes[j].nombre_comp != ""){
+					
+					cantidadNueva = (array_combos[i].componentes[j].cantidad * convertir_Str_Int(porcionesDadas))/array_combos[i].num_porciones;
+					cout << array_combos[i].componentes[j].nombre_comp + " " << cantidadNueva << endl;	
+				}		
+			}
+			return;	
+		}	
+	}
+	cout << "Combo no existe." << endl;
+	return;	
 }
 
 // Función menú que llama a las demás funciones.

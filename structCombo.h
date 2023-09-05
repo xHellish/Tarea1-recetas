@@ -3,7 +3,7 @@
 struct Combo{
 	
 	string nombre_combo;
-	int num_porciones;
+	float num_porciones;
 	Componente componentes[30];
 	int sizeCombo = 0;
 	
